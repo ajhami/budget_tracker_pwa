@@ -1,31 +1,37 @@
 const FILES_TO_CACHE = [
-    "/",
-    "/index.html",
-    "/index.js",
-    "/style.css",
-    "/manifest.webmanifest",
-    "/icons/icon-192x192.png",
-    "/icons/icon-512x512.png"
+    // "/",
+    "./",
+    "./index.js",
+    "./styles.css",
+    "./manifest.webmanifest",
+    "./icons/icon-192x192.png",
+    "./icons/icon-512x512.png"
 ];
 
 const PRECACHE = "static-precache-v1";
 const DATACACHE = "data-cache-v1";
 
+console.log("Test before installation")
+
 self.addEventListener("install", function (event) {
+    console.log("Test during installation")
     event.waitUntil(
         caches.open(PRECACHE)
             .then(cache => {
                 console.log("Your files have been pre-cached successfully.");
                 return cache.addAll(FILES_TO_CACHE);
             })
-            // .then(self.skipWaiting())
+            .then(self.skipWaiting())
             .catch(err => {
                 console.log("Error while pre-caching files.", err);
             })
     );
 
+
     // self.skipWaiting();
 });
+
+console.log("Test after installation")
 
 // self.addEventListener("activate", function (event) {
 //     // Possible keys
