@@ -1,5 +1,4 @@
 const FILES_TO_CACHE = [
-    // "/",
     "./",
     "./index.js",
     "./styles.css",
@@ -11,14 +10,12 @@ const FILES_TO_CACHE = [
 const PRECACHE = "static-precache-v1";
 const DATACACHE = "data-cache-v1";
 
-console.log("Test before installation")
 
 self.addEventListener("install", function (event) {
-    console.log("Test during installation")
     event.waitUntil(
         caches.open(PRECACHE)
             .then(cache => {
-                console.log("Your files have been pre-cached successfully.");
+                console.log("Files pre-cached successfully.");
                 return cache.addAll(FILES_TO_CACHE);
             })
             .then(self.skipWaiting())
@@ -26,32 +23,9 @@ self.addEventListener("install", function (event) {
                 console.log("Error while pre-caching files.", err);
             })
     );
-
-
-    // self.skipWaiting();
 });
 
-console.log("Test after installation")
-
-// self.addEventListener("activate", function (event) {
-//     // Possible keys
-//     const currentCaches = [PRECACHE, DATACACHE];
-//     event.waitUntil(
-//         caches.keys()
-//             .then(cacheKeys => {
-//                 return cacheKeys.filter(cacheKey => !currentCaches.includes(cacheKey));
-//             })
-//             .then(deleteCaches => {
-//                 return Promise.all(deleteCaches.map(deleteCache => {
-//                     return caches.delete(deleteCache);
-//                 }));
-//             }).then(() => self.clients.claim())
-//             .catch(err => {
-//                 console.log("Error while activating service worker.", err);
-//             })
-//     );
-// });
-
+// Activate service worker
 self.addEventListener("activate", function(event) {
     event.waitUntil(
         caches.keys().then(keyList => {
@@ -65,9 +39,7 @@ self.addEventListener("activate", function(event) {
             )
         })
     )
-
     self.clients.claim();
-
 });
 
 self.addEventListener("fetch", event => {
@@ -101,12 +73,5 @@ self.addEventListener("fetch", event => {
           });
         })
       );
-
-    // event.respondWith(
-    //     caches.match(event.request)
-    //         .then(function (response) {
-    //             return response || fetch(event.request);
-    //         })
-    // );
 });
 
