@@ -3,7 +3,7 @@
 ![Project Status](https://img.shields.io/badge/status-ready-green)
 ![License](https://img.shields.io/badge/License-mit-blue)
 
-[Click here to visit deployed application](https://dashboard.heroku.com/apps/pure-inlet-51486)
+###[Click here to visit deployed application](https://dashboard.heroku.com/apps/pure-inlet-51486)
 
 ## Description
 This application was developed with the design to demonstrate functionality of a Progressive Web Application. Budget Tracker PWA utilizes a service worker to enable offline functionality.
