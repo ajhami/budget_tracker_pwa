@@ -11,7 +11,7 @@ fetch("/api/transaction")
     if(Array.isArray(data)) {
       transactions = data;
     } else {
-      transactions = {data};
+      transactions = [data];
     }
 
     populateTotal();
